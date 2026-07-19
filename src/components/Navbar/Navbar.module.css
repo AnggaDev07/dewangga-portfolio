@@ -1,0 +1,282 @@
+/* ========================================
+   NAVBAR STYLES
+   ======================================== */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2000; /* Extremely high to stay above mobile overlays */
+  height: 80px; /* Reduced from 96px */
+  padding-top: 16px; /* Reduced from 24px */
+  display: flex;
+  align-items: flex-start;
+  transition: all var(--transition-normal);
+  background-color: transparent; /* Totally transparent as requested */
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-bottom: none;
+}
+
+.header.mobileHeaderOpen {
+  background-color: #000 !important;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.headerInner {
+  width: 100%;
+  padding-left: var(--section-padding-x);
+  padding-right: var(--section-padding-x);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0;
+  position: relative;
+}
+
+/* ========================================
+   LOGO
+   ======================================== */
+.logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  flex-shrink: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.logo:hover {
+  opacity: 0.8;
+}
+
+.logoImage {
+  width: 65px; /* Further reduced from 70px */
+  height: auto;
+  object-fit: contain;
+}
+
+/* ========================================
+   DESKTOP NAVIGATION
+   ======================================== */
+.nav {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  right: 40px;
+  transition: right 0.6s cubic-bezier(0.25, 0.8, 0.25, 1),
+              transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+  background-color: #2d2d2d61;
+  border-radius: 40px;
+  padding: 5px 7.5px;
+}
+
+.navCentered {
+  right: 50%;
+  transform: translateX(50%);
+}
+
+.navList {
+  position: relative; /* For absolutely positioned indicator */
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: transparent; /* Totally transparent links container */
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  padding: 4px 6px; /* Tightened padding */
+  border-radius: var(--radius-full);
+  border: none;
+}
+
+.navIndicator {
+  position: absolute;
+  left: 0;
+  top: 4px; /* Sync with new padding */
+  bottom: 4px;
+  background-color: #3d3d3d;
+  border-radius: var(--radius-full);
+  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+              width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+              opacity 0.3s ease;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.navItem {
+  position: relative;
+  z-index: 1; /* Keep text above the indicator */
+}
+
+.navLink {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 16px; /* More compact links */
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+  border-radius: var(--radius-full);
+  transition: color var(--transition-fast),
+    background-color var(--transition-fast);
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+}
+
+.navLink:hover {
+  color: var(--color-text-primary);
+}
+
+.navLinkActive {
+  /* No more background here; indicator handles the background */
+  background: linear-gradient(90deg, #a0b4c8, #5ba3c9, #4a9ec4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  transition: color 0.4s ease, -webkit-text-fill-color 0.4s ease;
+}
+
+/* ========================================
+   MOBILE MENU BUTTON
+   ======================================== */
+.mobileMenuBtn {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 32px; /* Smaller button */
+  height: 32px;
+  padding: 6px;
+  border-radius: var(--radius-sm);
+  transition: background-color var(--transition-fast);
+  z-index: 3000; /* Higher than any overlay */
+}
+
+.mobileMenuBtn:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.hamburgerLine {
+  display: block;
+  width: 18px; /* Shorter lines */
+  height: 2px;
+  background-color: var(--color-text-primary);
+  border-radius: var(--radius-full);
+  transition: transform var(--transition-normal),
+    opacity var(--transition-normal);
+}
+
+.mobileMenuBtnOpen .hamburgerLine:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.mobileMenuBtnOpen .hamburgerLine:nth-child(2) {
+  opacity: 0;
+}
+
+.mobileMenuBtnOpen .hamburgerLine:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ========================================
+   MOBILE NAVIGATION OVERLAY
+   ======================================== */
+.mobileNav {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #000; /* Solid black as requested for 'full hitam saja' */
+  z-index: calc(var(--z-navbar) + 1);
+  padding: 80px var(--section-padding-x) 40px; /* Adjusted padding for smaller header */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-normal),
+    visibility var(--transition-normal);
+}
+
+.mobileNavOpen {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobileNavList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mobileNavLink {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px; /* Tightened padding */
+  font-size: 14px; /* Reduced from 18px */
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  border-radius: var(--radius-md);
+  transition: color var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+.mobileNavLink:hover {
+  color: var(--color-text-primary);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.mobileNavLinkActive {
+  position: relative;
+  background: linear-gradient(90deg, #a0b4c8, #5ba3c9, #4a9ec4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.mobileNavLinkActive::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: #3d3d3d;
+  border-radius: var(--radius-md);
+  z-index: -1;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+@media (max-width: 768px) {
+  .header {
+    padding-top: 6px; 
+    height: 54px; /* Even smaller for mobile */
+    background-color: rgba(10, 10, 10, 0.1); /* 10% opacity as requested */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .logoImage {
+    width: 52px; /* Dainty logo size for mobile */
+  }
+
+  .nav {
+    display: none;
+  }
+
+  .mobileMenuBtn {
+    display: flex;
+    position: fixed;
+    top: 11px;
+    right: var(--section-padding-x);
+    z-index: 5000;
+  }
+
+  .mobileNav {
+    display: block;
+  }
+}

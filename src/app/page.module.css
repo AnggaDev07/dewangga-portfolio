@@ -1,0 +1,40 @@
+/* ========================================
+   PAGE STYLES
+   ======================================== */
+.page {
+  min-height: 100vh;
+  position: relative;
+  overflow-x: clip; /* Extra protection for Chrome mobile scroll jitter */
+}
+
+.main {
+  position: relative;
+}
+
+/* ========================================
+   PLACEHOLDER SECTIONS (for scroll targets)
+   ======================================== */
+.placeholderSection {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--navbar-height) var(--section-padding-x);
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.placeholderContent {
+  text-align: center;
+}
+
+.placeholderContent h2 {
+  font-size: 32px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.15);
+  margin-bottom: 8px;
+}
+
+.placeholderContent p {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.08);
+}
