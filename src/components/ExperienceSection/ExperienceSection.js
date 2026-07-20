@@ -27,7 +27,7 @@ const personalExperiences = [
     role: 'Full Stack Developer',
     company: 'PT. Philips Industries Batam · Intern',
     description:
-      'Designed, developed, and deployed internal web applications for industrial operations, including a Waste Management System and a Store Management Inventory System. Managed the full development lifecycle, from database design using Microsoft SQL Server to application deployment.',
+      'Designed, developed, and deployed internal web applications to support industrial operations, including the Waste Management System. Managed the full software development lifecycle, from database design and implementation using Microsoft SQL Server to application deployment and maintenance.',
   },
 ];
 

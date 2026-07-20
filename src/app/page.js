@@ -18,7 +18,6 @@ export default function Home() {
         
         <ExperienceSection />
 
-        {/* Render the newly renamed component */}
         <TechSkills />
 
         <ProjectsSection />

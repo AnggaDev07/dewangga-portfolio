@@ -24,9 +24,8 @@ export default function HeroSection() {
         <div className={styles.avatarWrapper}>
           <div className={styles.avatarRing}>
             <div className={styles.avatarInner}>
-              {/* Note: Remember to replace /images/avatar.png with your own portrait image later */}
               <Image
-                src="/images/avatar.png"
+                src="/images/profile_avatar.jpg"
                 alt={`${developerFullName} - ${taglineBoldText}${taglineAccentText}`}
                 width={160}
                 height={160}

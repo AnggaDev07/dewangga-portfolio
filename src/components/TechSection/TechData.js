@@ -6,7 +6,8 @@ export const technicalSkillsRows = [
     { id: "css", name: "CSS/SCSS", iconPath: "css3/css3-original.svg" },
     { id: "js", name: "JavaScript", iconPath: "javascript/javascript-original.svg" },
     { id: "react", name: "React", iconPath: "react/react-original.svg" },
-    { id: "nextjs", name: "NextJS", iconPath: "nextjs/nextjs-original.svg" }
+    { id: "nextjs", name: "NextJS", iconPath: "nextjs/nextjs-original.svg" },
+    { id: "flutter", name: "Flutter", iconPath: "flutter/flutter-original.svg" }
   ],
   [
     { id: "php", name: "PHP", iconPath: "php/php-original.svg" },

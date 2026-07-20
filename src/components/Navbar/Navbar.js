@@ -1,22 +1,27 @@
-"use client";
+'use client';
 
-import { useState, useEffect, useRef } from "react";
-import Image from "next/image";
-import styles from "./Navbar.module.css";
+import { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
+import styles from './Navbar.module.css';
 
 const NAV_ITEMS = [
-  { id: "home", label: "Home" },
-  { id: "experience", label: "Experience" },
-  { id: "stacks", label: "Stacks" },
-  { id: "projects", label: "Projects" },
-  { id: "contact", label: "Contact" },
+  { id: 'home', label: 'Home' },
+  { id: 'experience', label: 'Experience' },
+  // Changed label to 'Skills' while keeping id 'stacks' to maintain scroll anchor
+  { id: 'stacks', label: 'Skills' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'contact', label: 'Contact' },
 ];
 
 export default function Navbar() {
-  const [activeSection, setActiveSection] = useState("home");
+  const [activeSection, setActiveSection] = useState('home');
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [indicatorStyle, setIndicatorStyle] = useState({ transform: 'translateX(0px)', width: '0px', opacity: 0 });
+  const [indicatorStyle, setIndicatorStyle] = useState({
+    transform: 'translateX(0px)',
+    width: '0px',
+    opacity: 0,
+  });
   const navContainerRef = useRef(null);
   const isClickScrolling = useRef(false);
   const scrollTimeout = useRef(null);
@@ -34,7 +39,7 @@ export default function Navbar() {
       }
 
       const sections = NAV_ITEMS.map((item) =>
-        document.getElementById(item.id)
+        document.getElementById(item.id),
       ).filter(Boolean);
 
       const scrollPosition = window.scrollY + window.innerHeight / 3;
@@ -48,10 +53,10 @@ export default function Navbar() {
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
     handleScroll();
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener('scroll', handleScroll);
       if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
     };
   }, []);
@@ -59,19 +64,21 @@ export default function Navbar() {
   // Update scroll locking for mobile menu
   useEffect(() => {
     if (isMobileMenuOpen) {
-      document.body.style.overflow = "hidden";
+      document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = "";
+      document.body.style.overflow = '';
     }
-    
+
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = '';
     };
   }, [isMobileMenuOpen]);
 
   useEffect(() => {
     const updateIndicator = () => {
-      const activeElement = document.getElementById(`nav-item-${activeSection}`);
+      const activeElement = document.getElementById(
+        `nav-item-${activeSection}`,
+      );
       const container = navContainerRef.current;
       if (activeElement && container) {
         setIndicatorStyle({
@@ -83,18 +90,18 @@ export default function Navbar() {
     };
 
     const timeoutId = setTimeout(updateIndicator, 10);
-    window.addEventListener("resize", updateIndicator);
-    
+    window.addEventListener('resize', updateIndicator);
+
     return () => {
       clearTimeout(timeoutId);
-      window.removeEventListener("resize", updateIndicator);
+      window.removeEventListener('resize', updateIndicator);
     };
   }, [activeSection, isScrolled]);
 
   const handleNavClick = (e, sectionId) => {
     e.preventDefault();
     setIsMobileMenuOpen(false);
-    
+
     isClickScrolling.current = true;
     if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
 
@@ -103,7 +110,7 @@ export default function Navbar() {
       const offsetTop = element.offsetTop - 80;
       window.scrollTo({
         top: offsetTop,
-        behavior: "smooth",
+        behavior: 'smooth',
       });
     }
     setActiveSection(sectionId);
@@ -111,13 +118,19 @@ export default function Navbar() {
 
   return (
     <>
-      <header className={`${styles.header} ${isScrolled ? styles.scrolled : ""} ${isMobileMenuOpen ? styles.mobileHeaderOpen : ""}`}>
+      <header
+        className={`${styles.header} ${isScrolled ? styles.scrolled : ''} ${isMobileMenuOpen ? styles.mobileHeaderOpen : ''}`}
+      >
         <div className={styles.headerInner}>
           {/* Logo */}
-          <a href="#home" className={styles.logo} onClick={(e) => handleNavClick(e, "home")}>
+          <a
+            href='#home'
+            className={styles.logo}
+            onClick={(e) => handleNavClick(e, 'home')}
+          >
             <Image
-              src="/images/logo.png"
-              alt="AR Logo"
+              src='/images/logo.png'
+              alt='DY Logo'
               width={80}
               height={50}
               className={styles.logoImage}
@@ -126,15 +139,21 @@ export default function Navbar() {
           </a>
 
           {/* Desktop Navigation */}
-          <nav className={`${styles.nav} ${activeSection !== "home" ? styles.navCentered : ""}`}>
+          <nav
+            className={`${styles.nav} ${activeSection !== 'home' ? styles.navCentered : ''}`}
+          >
             <ul className={styles.navList} ref={navContainerRef}>
               <div className={styles.navIndicator} style={indicatorStyle} />
               {NAV_ITEMS.map((item) => (
-                <li key={item.id} id={`nav-item-${item.id}`} className={styles.navItem}>
+                <li
+                  key={item.id}
+                  id={`nav-item-${item.id}`}
+                  className={styles.navItem}
+                >
                   <a
                     href={`#${item.id}`}
                     className={`${styles.navLink} ${
-                      activeSection === item.id ? styles.navLinkActive : ""
+                      activeSection === item.id ? styles.navLinkActive : ''
                     }`}
                     onClick={(e) => handleNavClick(e, item.id)}
                   >
@@ -150,10 +169,10 @@ export default function Navbar() {
       {/* Mobile Menu Button - Isolated Top-Level Sibling */}
       <button
         className={`${styles.mobileMenuBtn} ${
-          isMobileMenuOpen ? styles.mobileMenuBtnOpen : ""
+          isMobileMenuOpen ? styles.mobileMenuBtnOpen : ''
         }`}
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        aria-label="Toggle navigation menu"
+        aria-label='Toggle navigation menu'
         aria-expanded={isMobileMenuOpen}
       >
         <span className={styles.hamburgerLine} />
@@ -164,7 +183,7 @@ export default function Navbar() {
       {/* Mobile Navigation Overlay */}
       <div
         className={`${styles.mobileNav} ${
-          isMobileMenuOpen ? styles.mobileNavOpen : ""
+          isMobileMenuOpen ? styles.mobileNavOpen : ''
         }`}
       >
         <nav>
@@ -174,7 +193,7 @@ export default function Navbar() {
                 <a
                   href={`#${item.id}`}
                   className={`${styles.mobileNavLink} ${
-                    activeSection === item.id ? styles.mobileNavLinkActive : ""
+                    activeSection === item.id ? styles.mobileNavLinkActive : ''
                   }`}
                   onClick={(e) => handleNavClick(e, item.id)}
                 >

@@ -3,7 +3,8 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import styles from "./ProjectsSection.module.css";
-import { INITIAL_PROJECTS as PROJECTS } from "./ProjectsData";
+// Importing the defined personal projects using camelCase aliases for logic splitting
+import { initialProjects as personalProjects, moreProjects } from "./ProjectsData";
 
 // Scroll distance (in px) allocated per project transition
 const STEP_HEIGHT = 500;
@@ -83,12 +84,12 @@ export default function ProjectsSection() {
       
       currentScrollRef.current = lerp(currentScrollRef.current, targetScrollRef.current, 0.1);
       
-      const totalRange = STEP_HEIGHT * (PROJECTS.length - 1);
+      const totalRange = STEP_HEIGHT * (personalProjects.length - 1);
       
       const newProgress = updateStyles(currentScrollRef.current, totalRange);
 
       const newActiveIndex = Math.min(
-        PROJECTS.length - 1,
+        personalProjects.length - 1,
         Math.floor((currentScrollRef.current + STEP_HEIGHT / 2) / STEP_HEIGHT)
       );
 
@@ -105,7 +106,7 @@ export default function ProjectsSection() {
       if (!outerRef.current) return;
       const rect = outerRef.current.getBoundingClientRect();
       const currentScrolledIn = -rect.top;
-      const totalRange = STEP_HEIGHT * (PROJECTS.length - 1);
+      const totalRange = STEP_HEIGHT * (personalProjects.length - 1);
       
       targetScrollRef.current = Math.max(0, Math.min(totalRange, currentScrolledIn));
     };
@@ -137,7 +138,7 @@ export default function ProjectsSection() {
     document.body.classList.remove("lightbox-open");
   };
 
-  const activeProject = PROJECTS[activeIndex];
+  const activeProject = personalProjects[activeIndex];
 
   const closeLightbox = () => {
     setLightbox({ ...lightbox, isOpen: false });
@@ -188,7 +189,7 @@ export default function ProjectsSection() {
       ref={outerRef}
       id="projects"
       className={styles.sectionOuter}
-      style={{ height: `calc(${(PROJECTS.length - 1) * STEP_HEIGHT + TRAILING_HEIGHT}px + 100vh)` }}
+      style={{ height: `calc(${(personalProjects.length - 1) * STEP_HEIGHT + TRAILING_HEIGHT}px + 100vh)` }}
     >
       <div className={styles.header}>
         <p className={styles.subtitle}>Where Ideas Become Systems</p>
@@ -201,19 +202,13 @@ export default function ProjectsSection() {
             <div className={styles.projectInfo}>
               <div key={activeProject.id} className={`${styles.fadeContent} ${scrollDir === "down" ? styles.fadeLeftUp : styles.fadeLeftDown}`}>
                 <div className={styles.projectInfoTitleWrapper}>
-                  {(activeProject.id === "project-1" || activeProject.id === "project-2" || activeProject.id === "project-3" || activeProject.id === "project-4") ? (
+                  {/* Dynamically render the icon of the first tech stack used in the project */}
+                  {activeProject.stacks && activeProject.stacks.length > 0 ? (
                     <img 
-                      src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nuxtjs/nuxtjs-original.svg" 
-                      alt="NuxtJS"
+                      src={`https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${activeProject.stacks[0].iconPath}`} 
+                      alt={activeProject.stacks[0].name}
                       className={`${styles.projectTypeIcon} ${styles.bubbleFadeRight}`}
                       style={{ animationDelay: "0s" }}
-                    />
-                  ) : activeProject.id === "project-5" ? (
-                    <img 
-                      src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" 
-                      alt="NextJS"
-                      className={`${styles.projectTypeIcon} ${styles.bubbleFadeRight}`}
-                      style={{ animationDelay: "0s", filter: "invert(1) brightness(2)" }}
                     />
                   ) : (
                     <svg 
@@ -315,7 +310,7 @@ export default function ProjectsSection() {
 
           <div className={`${styles.rightPanel} hide-cursor-hover`}>
             <div ref={projectsContainerRef} className={styles.projectsContainer}>
-              {PROJECTS.map((project, idx) => (
+              {personalProjects.map((project, idx) => (
                 <div 
                   key={project.id} 
                   ref={el => cardRefs.current[idx] = el}
@@ -337,22 +332,25 @@ export default function ProjectsSection() {
               ))}
             </div>
 
-            <div className={`${styles.seeMoreContainer} ${activeIndex === PROJECTS.length - 1 ? styles.showButton : styles.hideButton}`}>
-              <Link href="/more-projects" className={styles.seeMoreBtn}>
-                See More Project
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                  <defs>
-                    <linearGradient id="seeMoreGrad" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-                      <stop offset="0%" stopColor="#d4efff" />
-                      <stop offset="100%" stopColor="#084d7a" />
-                    </linearGradient>
-                  </defs>
-                  <circle cx="12" cy="12" r="10" stroke="url(#seeMoreGrad)"></circle>
-                  <polyline points="12 16 16 12 12 8" stroke="url(#seeMoreGrad)"></polyline>
-                  <line x1="8" y1="12" x2="16" y2="12" stroke="url(#seeMoreGrad)"></line>
-                </svg>
-              </Link>
-            </div>
+            {/* Dynamically hide or show the See More button based on available extra projects */}
+            {moreProjects.length > 0 && (
+              <div className={`${styles.seeMoreContainer} ${activeIndex === personalProjects.length - 1 ? styles.showButton : styles.hideButton}`}>
+                <Link href="/more-projects" className={styles.seeMoreBtn}>
+                  See More Project
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <defs>
+                      <linearGradient id="seeMoreGrad" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stopColor="#d4efff" />
+                        <stop offset="100%" stopColor="#084d7a" />
+                      </linearGradient>
+                    </defs>
+                    <circle cx="12" cy="12" r="10" stroke="url(#seeMoreGrad)"></circle>
+                    <polyline points="12 16 16 12 12 8" stroke="url(#seeMoreGrad)"></polyline>
+                    <line x1="8" y1="12" x2="16" y2="12" stroke="url(#seeMoreGrad)"></line>
+                  </svg>
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </section>

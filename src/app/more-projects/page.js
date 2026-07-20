@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { MORE_PROJECTS } from '@/components/ProjectsSection/ProjectsData';
+import { moreProjects } from '@/components/ProjectsSection/ProjectsData';
 import styles from './MoreProjects.module.css';
 
 export default function MoreProjects() {

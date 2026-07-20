@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import styles from "./Preloader.module.css";
-import { PROJECTS } from "../ProjectsSection/ProjectsData";
+// Updated import to use the new camelCase variable
+import { personalProjects } from "../ProjectsSection/ProjectsData";
 
 const STATIC_IMAGES = [
   "/images/avatar.png",
@@ -14,8 +15,8 @@ const STATIC_IMAGES = [
 function getAllImagesToPreload() {
   const allImages = [...STATIC_IMAGES];
   
-  // Collect all project images and stack icons
-  PROJECTS.forEach(project => {
+  // Collect all project images and stack icons using the new variable
+  personalProjects.forEach(project => {
     if (project.images) {
       allImages.push(...project.images);
     }
@@ -101,7 +102,8 @@ export default function Preloader() {
           <div className={styles.loaderRing}></div>
           <div className={styles.loaderRing}></div>
           <div className={styles.loaderRing}></div>
-          <p className={styles.brand}>AR</p>
+          {/* Changed brand initials from AR to DY for Dewangga Yusuf */}
+          <p className={styles.brand}>DY</p>
         </div>
         
         <div className={styles.progressSection}>
