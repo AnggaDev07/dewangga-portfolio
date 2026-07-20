@@ -7,8 +7,7 @@ import styles from './Navbar.module.css';
 const NAV_ITEMS = [
   { id: 'home', label: 'Home' },
   { id: 'experience', label: 'Experience' },
-  // Changed label to 'Skills' while keeping id 'stacks' to maintain scroll anchor
-  { id: 'stacks', label: 'Skills' },
+  { id: 'skills', label: 'Skills' },
   { id: 'projects', label: 'Projects' },
   { id: 'contact', label: 'Contact' },
 ];
@@ -129,9 +128,9 @@ export default function Navbar() {
             onClick={(e) => handleNavClick(e, 'home')}
           >
             <Image
-              src='/images/logo.png'
-              alt='DY Logo'
-              width={80}
+              src='/images/logo_cmd.png'
+              alt='Glitch A Logo'
+              width={50}
               height={50}
               className={styles.logoImage}
               priority

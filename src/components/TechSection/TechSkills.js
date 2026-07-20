@@ -61,7 +61,7 @@ export default function TechSkills() {
 
   return (
     <section 
-      id="stacks" 
+      id="skills" 
       className={styles.section}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}

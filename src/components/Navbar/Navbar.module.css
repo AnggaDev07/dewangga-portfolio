@@ -52,6 +52,10 @@
 }
 
 .logoImage {
+  /* Applying circular shape */
+  border-radius: 50%;
+  /* Ensuring the image covers the circle without distortion */
+  object-fit: cover;
   width: 65px; /* Further reduced from 70px */
   height: auto;
   object-fit: contain;

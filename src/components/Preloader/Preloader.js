@@ -1,28 +1,30 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import styles from "./Preloader.module.css";
+import { useEffect, useState } from 'react';
+import styles from './Preloader.module.css';
 // Updated import to use the new camelCase variable
-import { personalProjects } from "../ProjectsSection/ProjectsData";
+import { personalProjects } from '../ProjectsSection/ProjectsData';
 
 const STATIC_IMAGES = [
-  "/images/avatar.png",
-  "/images/stacks-bg-transparent.png",
-  "/images/stacks-bg.png",
-  "/images/logo.png"
+  '/images/avatar.png',
+  '/images/stacks-bg-transparent.png',
+  '/images/stacks-bg.png',
+  '/images/logo.png',
 ];
 
 function getAllImagesToPreload() {
   const allImages = [...STATIC_IMAGES];
-  
+
   // Collect all project images and stack icons using the new variable
-  personalProjects.forEach(project => {
+  personalProjects.forEach((project) => {
     if (project.images) {
       allImages.push(...project.images);
     }
     if (project.stacks) {
-      project.stacks.forEach(stack => {
-        allImages.push(`https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${stack.iconPath}`);
+      project.stacks.forEach((stack) => {
+        allImages.push(
+          `https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${stack.iconPath}`,
+        );
       });
     }
   });
@@ -37,19 +39,22 @@ export default function Preloader() {
 
   useEffect(() => {
     // Lock scroll immediately on mount
-    document.body.style.overflow = "hidden";
-    
+    document.body.style.overflow = 'hidden';
+
     // Slight delay to ensure DOM is ready and locking takes effect
     const imageURLs = getAllImagesToPreload();
     let loadedCount = 0;
-    
+
     // Create a min timer so the loader isn't a mere glitch if cached
     const startTime = Date.now();
     const MIN_LOADING_TIME = 1500;
 
     const handleProgress = () => {
       loadedCount++;
-      const progress = Math.min(100, Math.floor((loadedCount / imageURLs.length) * 100));
+      const progress = Math.min(
+        100,
+        Math.floor((loadedCount / imageURLs.length) * 100),
+      );
       setLoadingProgress(progress);
 
       if (loadedCount === imageURLs.length) {
@@ -65,7 +70,7 @@ export default function Preloader() {
         setIsFadingOut(true);
         setTimeout(() => {
           setIsPreloaderVisible(false);
-          document.body.style.overflow = "";
+          document.body.style.overflow = '';
         }, 800); // 0.8s for fadeOut animation
       }, remainingTime);
     };
@@ -89,35 +94,36 @@ export default function Preloader() {
 
     // Cleanup in case unmounted early
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = '';
     };
   }, []);
 
   if (!isPreloaderVisible) return null;
 
   return (
-    <div className={`${styles.preloaderContainer} ${isFadingOut ? styles.fadeOut : ""}`}>
+    <div
+      className={`${styles.preloaderContainer} ${isFadingOut ? styles.fadeOut : ''}`}
+    >
       <div className={styles.content}>
         <div className={styles.logoContainer}>
           <div className={styles.loaderRing}></div>
           <div className={styles.loaderRing}></div>
           <div className={styles.loaderRing}></div>
-          {/* Changed brand initials from AR to DY for Dewangga Yusuf */}
-          <p className={styles.brand}>DY</p>
+          <p className={styles.brand}>WELCOME</p>
         </div>
-        
+
         <div className={styles.progressSection}>
           <div className={styles.progressBarWrapper}>
-            <div 
-              className={styles.progressBar} 
+            <div
+              className={styles.progressBar}
               style={{ width: `${loadingProgress}%` }}
             >
               <div className={styles.progressGlow}></div>
             </div>
           </div>
-          
+
           <div className={styles.progressTextWrapper}>
-            <span className={styles.progressText} data-text="INITIALIZING SYS">
+            <span className={styles.progressText} data-text='INITIALIZING SYS'>
               INITIALIZING SYS
             </span>
             <span className={styles.percentageText}>{loadingProgress}%</span>
