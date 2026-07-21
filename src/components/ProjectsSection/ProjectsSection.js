@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image"; // Added next/image for automatic optimization
 import styles from "./ProjectsSection.module.css";
 // Importing the defined personal projects using camelCase aliases for logic splitting
 import { initialProjects as personalProjects, moreProjects } from "./ProjectsData";
@@ -32,6 +33,9 @@ export default function ProjectsSection() {
   const targetScrollRef = useRef(0);
   const currentScrollRef = useRef(0);
 
+  const [lightbox, setLightbox] = useState({ isOpen: false, project: null, imageIndex: 0 });
+  const [zoom, setZoom] = useState(1);
+
   useEffect(() => {
     activeIndexRef.current = activeIndex;
   }, [activeIndex]);
@@ -44,6 +48,28 @@ export default function ProjectsSection() {
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
+
+  // Centralized useEffect to handle body class and style mutations safely
+  useEffect(() => {
+    if (descModal.isOpen || lightbox.isOpen) {
+      document.body.style.overflow = "hidden";
+      document.body.classList.add("lightbox-open");
+      if (lightbox.isOpen) {
+        document.body.classList.add("hide-rainbow-cursor");
+      }
+    } else {
+      document.body.style.overflow = "";
+      document.body.classList.remove("lightbox-open");
+      document.body.classList.remove("hide-rainbow-cursor");
+    }
+
+    // Cleanup function to ensure styles are reset if component unmounts
+    return () => {
+      document.body.style.overflow = "";
+      document.body.classList.remove("lightbox-open");
+      document.body.classList.remove("hide-rainbow-cursor");
+    };
+  }, [descModal.isOpen, lightbox.isOpen]);
 
   useEffect(() => {
     let animationFrameId;
@@ -123,37 +149,28 @@ export default function ProjectsSection() {
     };
   }, []);
 
-  const [lightbox, setLightbox] = useState({ isOpen: false, project: null, imageIndex: 0 });
-  const [zoom, setZoom] = useState(1);
-
   const openDescModal = (project) => {
     setDescModal({ isOpen: true, project });
-    document.body.style.overflow = "hidden";
-    document.body.classList.add("lightbox-open");
   };
 
   const closeDescModal = () => {
     setDescModal({ isOpen: false, project: null });
-    document.body.style.overflow = "";
-    document.body.classList.remove("lightbox-open");
   };
 
   const activeProject = personalProjects[activeIndex];
 
+  // Calculating dynamic delay to ensure the Source Code button appears after all stacks have rendered
+  const baseStackDelay = 0.8 + (activeProject.highlights?.length || 0) * 0.15 + 0.2;
+  const sourceCodeButtonDelay = baseStackDelay + (activeProject.stacks?.length || 0) * 0.1 + 0.2;
+
   const closeLightbox = () => {
     setLightbox({ ...lightbox, isOpen: false });
-    document.body.style.overflow = "";
-    document.body.classList.remove("hide-rainbow-cursor");
-    document.body.classList.remove("lightbox-open");
   };
 
   const openLightbox = (project, index) => {
     if (!project.images || project.images.length === 0) return;
     setLightbox({ isOpen: true, project, imageIndex: index });
     setZoom(1);
-    document.body.style.overflow = "hidden";
-    document.body.classList.add("hide-rainbow-cursor");
-    document.body.classList.add("lightbox-open");
   };
 
   const nextImage = (e) => {
@@ -204,11 +221,14 @@ export default function ProjectsSection() {
                 <div className={styles.projectInfoTitleWrapper}>
                   {/* Dynamically render the icon of the first tech stack used in the project */}
                   {activeProject.stacks && activeProject.stacks.length > 0 ? (
-                    <img 
+                    <Image 
                       src={`https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${activeProject.stacks[0].iconPath}`} 
                       alt={activeProject.stacks[0].name}
                       className={`${styles.projectTypeIcon} ${styles.bubbleFadeRight}`}
                       style={{ animationDelay: "0s" }}
+                      width={32}
+                      height={32}
+                      unoptimized={true}
                     />
                   ) : (
                     <svg 
@@ -239,10 +259,13 @@ export default function ProjectsSection() {
                   <div className={styles.mobileTechStack}>
                     {activeProject.stacks.map((stack, sIdx) => (
                       <div key={sIdx} className={styles.mobileStackItem}>
-                        <img 
+                        <Image 
                           src={`https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${stack.iconPath}`} 
                           alt={stack.name} 
                           className={styles.mobileStackIcon} 
+                          width={16}
+                          height={16}
+                          unoptimized={true}
                         />
                       </div>
                     ))}
@@ -279,10 +302,13 @@ export default function ProjectsSection() {
                               className={`${styles.stackBadge} ${styles.bubbleZoom}`}
                               style={{ animationDelay: `${baseDelay + sIdx * 0.1}s` }}
                             >
-                              <img
+                              <Image
                                 src={`https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${stack.iconPath}`}
                                 alt={stack.name}
                                 className={styles.stackIcon}
+                                width={14}
+                                height={14}
+                                unoptimized={true}
                               />
                               <span className={styles.stackName}>{stack.name}</span>
                             </div>
@@ -290,6 +316,23 @@ export default function ProjectsSection() {
                         })}
                       </div>
                     </>
+                  )}
+
+                  {/* Rendering the Source Code button conditionally based on repoUrl presence */}
+                  {activeProject.repoUrl && (
+                    <div className={`${styles.actionButtons} ${styles.staggerFadeIn}`} style={{ animationDelay: `${sourceCodeButtonDelay}s` }}>
+                      <a 
+                        href={activeProject.repoUrl} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className={styles.sourceCodeBtn}
+                      >
+                        <svg className={styles.sourceCodeIcon} viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.6.113.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
+                        </svg>
+                        View Source Code
+                      </a>
+                    </div>
                   )}
 
                   {(isMobile || activeProject.description.length > 1000) && (
@@ -319,13 +362,19 @@ export default function ProjectsSection() {
                 >
                   <div className={styles.imageGrid}>
                     <div className={`${styles.imgBox} ${styles.imgTopLeft}`} onClick={() => openLightbox(project, 1)}>
-                      {project.images?.[1] && <img src={project.images[1]} alt={project.title} className={styles.projectImage} />}
+                      {project.images?.[1] && (
+                        <Image src={project.images[1]} alt={project.title} className={styles.projectImage} width={800} height={600} unoptimized={true} />
+                      )}
                     </div>
                     <div className={`${styles.imgBox} ${styles.imgBottomLeft}`} onClick={() => openLightbox(project, 2)}>
-                      {project.images?.[2] && <img src={project.images[2]} alt={project.title} className={styles.projectImage} />}
+                      {project.images?.[2] && (
+                        <Image src={project.images[2]} alt={project.title} className={styles.projectImage} width={800} height={600} unoptimized={true} />
+                      )}
                     </div>
                     <div className={`${styles.imgBox} ${styles.imgMain}`} onClick={() => openLightbox(project, 0)}>
-                      {project.images?.[0] && <img src={project.images[0]} alt={project.title} className={styles.projectImage} />}
+                      {project.images?.[0] && (
+                        <Image src={project.images[0]} alt={project.title} className={styles.projectImage} width={800} height={600} unoptimized={true} />
+                      )}
                     </div>
                   </div>
                 </div>
@@ -394,11 +443,14 @@ export default function ProjectsSection() {
             </button>
 
             <div className={styles.lightboxImageWrapper}>
-              <img 
+              <Image 
                 src={lightbox.project.images[lightbox.imageIndex]} 
                 alt="Enlarged project view" 
                 className={styles.lightboxImage}
                 style={{ transform: `scale(${zoom})` }}
+                width={1920}
+                height={1080}
+                unoptimized={true}
               />
             </div>
 
@@ -414,7 +466,7 @@ export default function ProjectsSection() {
                     className={`${styles.thumbnailItem} ${lightbox.imageIndex === idx ? styles.activeThumbnail : ""}`}
                     onClick={(e) => { e.stopPropagation(); setLightbox({ ...lightbox, imageIndex: idx }); setZoom(1); }}
                   >
-                    <img src={img} alt={`thumbnail ${idx}`} />
+                    <Image src={img} alt={`thumbnail ${idx}`} width={60} height={40} unoptimized={true} />
                   </div>
                 ))}
               </div>

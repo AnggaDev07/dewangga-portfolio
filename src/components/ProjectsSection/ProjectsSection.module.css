@@ -1128,3 +1128,47 @@ body.lightbox-open [class*="sidebar"] {
   .nextBtn { right: 10px; }
   .closeBtn { top: 20px; right: 20px; }
 }
+
+/* =============================================
+   SOURCE CODE BUTTON
+   ============================================= */
+.actionButtons {
+  display: flex;
+  margin-top: 24px;
+  width: 100%;
+}
+
+.sourceCodeBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 99px;
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #fff;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.sourceCodeBtn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.sourceCodeIcon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 1024px) {
+  .actionButtons {
+    justify-content: center;
+    margin-top: 20px;
+  }
+}

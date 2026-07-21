@@ -1,112 +1,171 @@
 // Defining personal projects using camelCase convention
 export const personalProjects = [
   {
-    id: "project-1",
-    title: "Web Flip-Floper",
-    description: "A user-friendly e-commerce web application designed to simplify the process of finding and purchasing a wide variety of flip-flops online, delivering a seamless shopping experience right from home.",
+    id: 'project-1',
+    title: 'Web Flip-Floper',
+    description:
+      'A user-friendly e-commerce web application designed to simplify the process of finding and purchasing a wide variety of flip-flops online, delivering a seamless shopping experience right from home.',
     highlights: [
-      "User-Friendly E-Commerce Interface",
-      "Seamless Online Shopping Experience",
-      "Comprehensive Product Catalog",
-      "Streamlined Checkout Process"
+      'User-Friendly E-Commerce Interface',
+      'Seamless Online Shopping Experience',
+      'Comprehensive Product Catalog',
+      'Streamlined Checkout Process',
     ],
     stacks: [
-      { id: "html", name: "HTML", iconPath: "html5/html5-original.svg" },
-      { id: "css", name: "CSS", iconPath: "css3/css3-original.svg" },
-      { id: "php", name: "PHP", iconPath: "php/php-original.svg" },
-      { id: "laravel", name: "Laravel 8", iconPath: "laravel/laravel-original.svg" }
+      { id: 'html', name: 'HTML', iconPath: 'html5/html5-original.svg' },
+      { id: 'css', name: 'CSS', iconPath: 'css3/css3-original.svg' },
+      { id: 'php', name: 'PHP', iconPath: 'php/php-original.svg' },
+      {
+        id: 'laravel',
+        name: 'Laravel 8',
+        iconPath: 'laravel/laravel-original.svg',
+      },
     ],
     images: [
-      "/images/flipfloper-1.jpg",
-      "/images/flipfloper-2.jpg",
-      "/images/flipfloper-3.jpg"
-    ]
+      '/projects/flipfloper/flipfloper-1.png',
+      '/projects/flipfloper/flipfloper-2.png',
+      '/projects/flipfloper/flipfloper-3.png',
+      '/projects/flipfloper/flipfloper-4.png',
+      '/projects/flipfloper/flipfloper-5.png',
+      '/projects/flipfloper/flipfloper-6.png',
+      '/projects/flipfloper/flipfloper-7.png',
+      '/projects/flipfloper/flipfloper-8.png',
+    ],
+    repoUrl: 'https://github.com/AnggaDev07/nama-repo-flipfloper', // Update with actual GitHub repo URL
   },
   {
-    id: "project-2",
-    title: "Djawa Store",
-    description: "A comprehensive web-based e-commerce platform tailored for computer and laptop components. It features an intuitive interface and complete functionalities to streamline the hardware purchasing process for tech enthusiasts.",
+    id: 'project-2',
+    title: 'Djawa Store',
+    description:
+      'A comprehensive web-based e-commerce platform tailored for computer and laptop components. It features an intuitive interface and complete functionalities to streamline the hardware purchasing process for tech enthusiasts.',
     highlights: [
-      "Hardware-Specific E-Commerce Platform",
-      "Intuitive User Interface",
-      "Secure Purchasing Process",
-      "Comprehensive Product Filtering"
+      'Hardware-Specific E-Commerce Platform',
+      'Intuitive User Interface',
+      'Secure Purchasing Process',
+      'Comprehensive Product Filtering',
     ],
     stacks: [
-      { id: "react", name: "React", iconPath: "react/react-original.svg" },
-      { id: "php", name: "PHP", iconPath: "php/php-original.svg" },
-      { id: "laravel", name: "Laravel 8", iconPath: "laravel/laravel-original.svg" },
-      { id: "mysql", name: "mysql", iconPath: "mysql/mysql-original.svg" }
+      { id: 'react', name: 'React', iconPath: 'react/react-original.svg' },
+      { id: 'php', name: 'PHP', iconPath: 'php/php-original.svg' },
+      {
+        id: 'laravel',
+        name: 'Laravel 8',
+        iconPath: 'laravel/laravel-original.svg',
+      },
+      { id: 'mysql', name: 'mysql', iconPath: 'mysql/mysql-original.svg' },
     ],
     images: [
-      "/images/djawastore-1.jpg",
-      "/images/djawastore-2.jpg",
-      "/images/djawastore-3.jpg"
-    ]
+      '/projects/djawastore/djawastore-1.png',
+      '/projects/djawastore/djawastore-2.png',
+      '/projects/djawastore/djawastore-3.png',
+      '/projects/djawastore/djawastore-4.png',
+      '/projects/djawastore/djawastore-5.png',
+      '/projects/djawastore/djawastore-6.png',
+      '/projects/djawastore/djawastore-7.png',
+      '/projects/djawastore/djawastore-8.png',
+    ],
+    repoUrl: 'https://github.com/AnggaDev07/nama-repo-djawastore', // Update with actual GitHub repo URL
   },
   {
-    id: "project-3",
-    title: "Parkirin",
-    description: "A mobile-based cashless payment system for on-street parking in Batam City. Designed for convenience and speed, it allows users to securely pay their daily parking fees through a streamlined mobile interface.",
+    id: 'project-3',
+    title: 'Parkirin',
+    description:
+      'A mobile-based cashless payment system for on-street parking in Batam City. Designed for convenience and speed, it allows users to securely pay their daily parking fees through a streamlined mobile interface.',
     highlights: [
-      "Cashless On-Street Parking",
-      "Streamlined Mobile Payment Workflow",
-      "Batam City Area Integration",
-      "Secure & Fast Transactions"
+      'Cashless On-Street Parking',
+      'Streamlined Mobile Payment Workflow',
+      'Batam City Area Integration',
+      'Secure & Fast Transactions',
     ],
     stacks: [
-      { id: "react", name: "React Native", iconPath: "react/react-original.svg" },
-      { id: "firebase", name: "Firebase", iconPath: "firebase/firebase-original.svg" },
-      { id: "php", name: "PHP", iconPath: "php/php-original.svg" }
+      {
+        id: 'react',
+        name: 'React Native',
+        iconPath: 'react/react-original.svg',
+      },
+      {
+        id: 'firebase',
+        name: 'Firebase',
+        iconPath: 'firebase/firebase-original.svg',
+      },
+      { id: 'php', name: 'PHP', iconPath: 'php/php-original.svg' },
     ],
     images: [
-      "/images/parkirin-1.jpg",
-      "/images/parkirin-2.jpg",
-      "/images/parkirin-3.jpg"
-    ]
+      '/projects/parkirin/parkirin-1.png',
+      '/projects/parkirin/parkirin-2.png',
+      '/projects/parkirin/parkirin-3.png',
+      '/projects/parkirin/parkirin-4.png',
+      '/projects/parkirin/parkirin-5.png',
+      '/projects/parkirin/parkirin-6.png',
+      '/projects/parkirin/parkirin-7.png',
+      '/projects/parkirin/parkirin-8.png',
+    ],
+    repoUrl: 'https://github.com/AnggaDev07/nama-repo-parkirin', // Update with actual GitHub repo URL
   },
   {
-    id: "project-4",
-    title: "Stock Rising",
-    description: "An award-winning Android multiplayer game adapted from a physical board game to teach stock investment principles. Featuring real-time player interactions, it provides an engaging, interactive, and safe learning environment. (1st Place in Art & Visualization, KMIPN VII 2025).",
+    id: 'project-4',
+    title: 'Stock Rising',
+    description:
+      'An award-winning Android multiplayer game adapted from a physical board game to teach stock investment principles. Featuring real-time player interactions, it provides an engaging, interactive, and safe learning environment. (1st Place in Art & Visualization, KMIPN VII 2025).',
     highlights: [
-      "1st Place Art & Visualization (KMIPN VII)",
-      "Real-Time Multiplayer Interactions",
-      "Interactive Stock Investment Learning",
-      "Android Platform Integration"
+      '1st Place Art & Visualization (KMIPN VII)',
+      'Real-Time Multiplayer Interactions',
+      'Interactive Stock Investment Learning',
+      'Android Platform Integration',
     ],
     stacks: [
-      { id: "csharp", name: "C#", iconPath: "csharp/csharp-original.svg" },
-      { id: "unity", name: "Unity", iconPath: "unity/unity-original.svg" },
-      { id: "firebase", name: "Firebase", iconPath: "firebase/firebase-original.svg" }
+      { id: 'csharp', name: 'C#', iconPath: 'csharp/csharp-original.svg' },
+      { id: 'unity', name: 'Unity', iconPath: 'unity/unity-original.svg' },
+      {
+        id: 'firebase',
+        name: 'Firebase',
+        iconPath: 'firebase/firebase-original.svg',
+      },
     ],
     images: [
-      "/images/stockrising-1.jpg",
-      "/images/stockrising-2.jpg",
-      "/images/stockrising-3.jpg"
-    ]
+      '/projects/stockrising/stockrising-1.png',
+      '/projects/stockrising/stockrising-2.png',
+      '/projects/stockrising/stockrising-3.png',
+      '/projects/stockrising/stockrising-4.png',
+      '/projects/stockrising/stockrising-5.png',
+      '/projects/stockrising/stockrising-6.png',
+      '/projects/stockrising/stockrising-7.png',
+      '/projects/stockrising/stockrising-8.png',
+    ],
+    repoUrl: 'https://github.com/AnggaDev07/nama-repo-stockrising', // Update with actual GitHub repo URL
   },
   {
-    id: "project-5",
-    title: "Waste Management System [WMS]",
-    description: "An enterprise-grade web application developed for PT Philips Industries Batam. Built to ensure independent, transparent, and efficient waste data integration and management within a global manufacturing environment.",
+    id: 'project-5',
+    title: 'Waste Management System [WMS]',
+    description:
+      'An enterprise-grade web application developed for PT Philips Industries Batam. Built to ensure independent, transparent, and efficient waste data integration and management within a global manufacturing environment.',
     highlights: [
-      "Enterprise-Grade Data Integration",
-      "Transparent Waste Tracking Workflow",
-      "Internal Industrial Deployment",
-      "Automated End-to-End Workflow"
+      'Enterprise-Grade Data Integration',
+      'Transparent Waste Tracking Workflow',
+      'Internal Industrial Deployment',
+      'Automated End-to-End Workflow',
     ],
     stacks: [
-      { id: "csharp", name: "C#", iconPath: "csharp/csharp-original.svg" },
-      { id: "laravel", name: "Laravel 8", iconPath: "laravel/laravel-original.svg" },
-      { id: "php", name: "PHP", iconPath: "php/php-original.svg" }
+      { id: 'csharp', name: 'C#', iconPath: 'csharp/csharp-original.svg' },
+      {
+        id: 'laravel',
+        name: 'Laravel 8',
+        iconPath: 'laravel/laravel-original.svg',
+      },
+      { id: 'php', name: 'PHP', iconPath: 'php/php-original.svg' },
     ],
     images: [
-      "/images/wms-1.jpg",
-      "/images/wms-2.jpg",
-      "/images/wms-3.jpg"
-    ]
-  }
+      '/projects/wms/wms-1.png',
+      '/projects/wms/wms-2.png',
+      '/projects/wms/wms-3.png',
+      '/projects/wms/wms-4.png',
+      '/projects/wms/wms-5.png',
+      '/projects/wms/wms-6.png',
+      '/projects/wms/wms-7.png',
+      '/projects/wms/wms-8.png',
+    ],
+    repoUrl: 'https://github.com/AnggaDev07/nama-repo-wms', // Update with actual GitHub repo URL
+  },
 ];
 
 // Exporting sliced arrays using camelCase convention for future expansions

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image"; // Importing Next.js optimized Image component
 // Update the CSS module import to the new file name
 import styles from "./TechSkills.module.css";
 // Importing technical skills data using camelCase convention to match the new section title
@@ -50,11 +51,14 @@ export default function TechSkills() {
     }
 
     return (
-      <img 
+      // Replaced img with next/image component for better optimization
+      <Image 
         src={`https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${skill.iconPath}`} 
         alt={skill.name}
         className={styles.cardIcon}
-        loading="lazy"
+        width={48} // Added required width property
+        height={48} // Added required height property
+        unoptimized={true} // Bypasses the need to configure external CDN domain in next.config.js
       />
     );
   };
@@ -72,17 +76,24 @@ export default function TechSkills() {
         
         <div className={styles.cloudWrapper}>
           {/* Dim base layer (static relative position to give wrapper height) */}
-          <img 
+          {/* Replaced img with next/image */}
+          <Image 
             src="/images/stacks-bg-transparent.png" 
-            alt="" 
-            className={styles.cloudBg} 
+            alt="Background Base Layer" 
+            className={styles.cloudBg}
+            width={1200} // Set an estimated large width for the background wrapper
+            height={800} // Set an estimated large height for the background wrapper
+            priority
           />
           
           {/* Spreading electric highlight layer (absolute positioned on top) */}
-          <img 
+          {/* Replaced img with next/image */}
+          <Image 
             src="/images/stacks-bg-transparent.png" 
             alt="Network Connections" 
             className={`${styles.cloudBg} ${styles.cloudBgHighlight}`} 
+            width={1200}
+            height={800}
           />
         </div>
       </div>
