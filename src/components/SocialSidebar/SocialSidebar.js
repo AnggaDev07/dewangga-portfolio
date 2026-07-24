@@ -1,16 +1,9 @@
 "use client";
 
 import styles from "./SocialSidebar.module.css";
-
-import { GitlabIcon, GithubIcon, LinkedinIcon } from "../Icons";
+import { GithubIcon, LinkedinIcon } from "../Icons";
 
 const SOCIAL_LINKS = [
-  {
-    id: "gitlab",
-    label: "GitLab",
-    href: "#",
-    Icon: GitlabIcon,
-  },
   {
     id: "github",
     label: "GitHub",

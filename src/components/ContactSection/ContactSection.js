@@ -1,7 +1,7 @@
 'use client';
 
 import styles from './ContactSection.module.css';
-import { GitlabIcon, GithubIcon, LinkedinIcon } from '../Icons';
+import { GithubIcon, LinkedinIcon } from '../Icons';
 
 export default function ContactSection() {
   return (
@@ -58,15 +58,6 @@ export default function ContactSection() {
         </div>
 
         <div className={styles.socialsContainer}>
-          <a
-            href='#'
-            target='_blank'
-            rel='noopener noreferrer'
-            className={styles.socialLink}
-          >
-            <GitlabIcon className={styles.socialIcon} aria-label='Gitlab' />
-            <span className={styles.socialText}>Gitlab</span>
-          </a>
           <a
             href='https://github.com/AnggaDev07/'
             target='_blank'
