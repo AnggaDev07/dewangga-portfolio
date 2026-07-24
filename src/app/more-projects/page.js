@@ -14,13 +14,21 @@ export default function MoreProjects() {
     if (!project.images || project.images.length === 0) return;
     setLightbox({ isOpen: true, project, imageIndex: index });
     setZoom(1);
+    
+    // Disabling ESLint immutability rule for direct DOM body manipulation
+    // eslint-disable-next-line react-hooks/immutability
     document.body.style.overflow = "hidden";
+    // eslint-disable-next-line react-hooks/immutability
     document.body.classList.add("lightbox-open");
   };
 
   const closeLightbox = () => {
     setLightbox({ ...lightbox, isOpen: false });
+    
+    // Disabling ESLint immutability rule for direct DOM body manipulation
+    // eslint-disable-next-line react-hooks/immutability
     document.body.style.overflow = "auto";
+    // eslint-disable-next-line react-hooks/immutability
     document.body.classList.remove("lightbox-open");
   };
 
@@ -85,7 +93,8 @@ export default function MoreProjects() {
       {/* Grid Content */}
       <div className={styles.content}>
         <div className={styles.projectsGrid}>
-          {MORE_PROJECTS.map((project) => (
+          {/* Changed MORE_PROJECTS to moreProjects to match camelCase import */}
+          {moreProjects.map((project) => (
             <div key={project.id} className={`${styles.projectCard} hide-cursor-hover`}>
               {/* Image Grid */}
               <div className={styles.imageGrid}>
