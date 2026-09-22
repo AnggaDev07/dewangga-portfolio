@@ -17,10 +17,10 @@ export default function ContactSection() {
             <div className={styles.infoBlock}>
               <span className={styles.infoLabel}>Email :</span>
               <a
-                href='mailto:anggadev07@gmail.com'
+                href='mailto:dewanggafadillahy@gmail.com'
                 className={styles.infoValue}
               >
-                anggadev07@gmail.com
+                dewanggafadillahy@gmail.com
               </a>
             </div>
             <div className={styles.infoBlock}>
